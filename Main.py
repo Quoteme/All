@@ -31,6 +31,9 @@ def Menu(pos, button, Mode):
         #SoundmodulButton
         PingPongStartImg = pygame.image.load('Bilder/PingPongStarteButton.png')
         Mode = gs.CustemButtonImage(screenData, pos, button, (400, 100), 'PingPong', Mode, PingPongStartImg)
+        #MandelbrotButton
+        MandelbrotStartImg = pygame.image.load('Bilder/MandelbrotStartButton.png')
+        Mode = gs.CustemButtonImage(screenData, pos, button, (560, 100), 'Mandelbrot', Mode, MandelbrotStartImg)
     return Mode
 
 #Mausbewegungen vordefinieren
@@ -52,10 +55,3 @@ while Run:
     Mode, Run, pos, button = Mb.Mandelbrot(screenData, pos, button, Mode, Run)
     #Starte PingPong
     Mode, Run, pos, button = PP.PingPong(screenData, pos, button, Mode, Run)
-    print(pygame.key.get_pressed())
-    n=0
-    for i in pygame.key.get_pressed():
-        if i == 1:
-            break
-        n = n+1
-    print(n)
