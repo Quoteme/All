@@ -6,18 +6,32 @@ import GeneralStructures as gs
 
 class Ball():
     def __init__(self,size,pos,movement,color):
-        self.size = size
-        self.movement = movement
-        self.pos = pos
-        self.color = color
+        self.size     = size     # Vector in IR^2
+        self.movement = movement # Vector in IR^2
+        self.pos      = pos      # Vector in IR^2
+        self.color    = color
 
     def show(self,screenData):
+        """
+        Malt den Ball mittels Pygame
+        """
         screen ,screen_width, screen_height, Clock= screenData
-        BallRect = pygame.Rect(self.pos[0]-(self.size[0]/2), self.pos[1]-(self.size[1]/2), self.size[0], self.size[1])
+        BallRect = pygame.Rect(
+                self.pos[0]-(self.size[0]/2), # x-Anfang des Balls
+                self.pos[1]-(self.size[1]/2), # y-Anfang des Balls
+                self.size[0],                 # x-Ende des Balls
+                self.size[1],                 # y-Ende des Balls
+                )
         pygame.draw.rect(screen , self.color , BallRect)
 
 
     def checkpos(self,screenData):
+        """
+        Wenn der Ball ober-/unterhalb des Spielfelds ist, wird er nach
+            unten/oben geschickt
+        Wenn der Ball links-/rechts des Spielfelds ist, wird er nach
+            rechts/links geschickt
+        """
         screen ,screen_width, screen_height, Clock= screenData
         if not (100+self.size[0]/2 < self.pos[0] <screen_width-(100+self.size[0]/2)):
             self.movement[0] = -self.movement[0]
@@ -26,6 +40,7 @@ class Ball():
         return self
 
     def move(self):
+        # Addiere Movement auf Position
         for i in range(2):
             self.pos[i] = self.pos[i] + self.movement[i]
 
